@@ -1,13 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
   Button,
-  Card,
   CardActions,
-  CardContent,
   FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   CircularProgress,
   Box,
   FormHelperText,
@@ -31,6 +26,7 @@ export default function Search() {
     formState: { errors },
   } = gitForm;
   const [showToast, setShowToast] = useState(false);
+  const [messageToast, setMessageToast] = useState('Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde.');
 
   const handleSetUser = async (event: any) => {
     const value = event.target.value;
@@ -42,9 +38,13 @@ export default function Search() {
     setLoading(true);
     try {
       const resp = await getUserInfos(getValues("user"));
-      console.log('resp user =>', resp)
-      setValue("userInfos", resp);
-    } catch {
+      setValue("userInfos", resp.data);
+    } catch (err:any){
+      if(err.response.status === 404){
+        setMessageToast("Usuário não encontrado.")
+      } else {
+        setMessageToast("Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde.")
+      } 
       setShowToast(true);
       setValue("userInfos", "");
     } finally {
@@ -56,9 +56,13 @@ export default function Search() {
     setLoading(true);
     try {
       const resp = await getUserRepos(getValues("user"));
-      console.log('resp repo=>', resp)
-      setValue("userRepos", resp);
-    } catch {
+      setValue("userRepos", resp.data);
+    } catch (err:any){
+      if(err.response.status === 404){
+        setMessageToast("Usuário não encontrado.")
+      } else {
+        setMessageToast("Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde.")
+      }
       setShowToast(true);
       setValue("userRepos", "");
     } finally {
@@ -85,7 +89,7 @@ export default function Search() {
           <Snackbar
             open={showToast}
             autoHideDuration={6000}
-            message="Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde"
+            message={messageToast}
           />
         )}
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import {
   Avatar,
-  Box,
-  Button,
   Card,
   CardContent,
-  Chip,
   CircularProgress,
   Typography,
 } from "@mui/material";
@@ -25,7 +22,6 @@ export default function SearchResult() {
         <Card sx = {{marginTop:"1%", marginBottom:"1%"}}>
           <CardContent
             sx={{
-              // maxWidth: "15%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

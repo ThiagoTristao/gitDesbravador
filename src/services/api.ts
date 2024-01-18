@@ -1,17 +1,14 @@
-
+import axios from 'axios';
 import apiURL from '@/constants/api';
 
 export async function getUserInfos(username: string) {
-        const response =  await fetch(`${apiURL}/users/${username}`);
-        return response.json();
+    return await axios.get(`${apiURL}/users/${username}`)
 }
 
 export async function getUserRepos(username: string) {
-        const response =  await fetch(`${apiURL}/users/${username}/repos`);
-        return response.json();
+    return await axios.get(`${apiURL}/users/${username}/repos`)
 }
 
 export async function getRepoInfos(username: string, repo: string) {
-    const response = await fetch(`${apiURL}/repos/${username}/${repo}`);
-    return response.json();
+    return await axios.get(`${apiURL}/repos/${username}/${repo}`)
 }

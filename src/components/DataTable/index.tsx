@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { MyContext } from "@/context/context";
 import MUIDataTable, { MUIDataTableColumnDef } from "mui-datatables";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
