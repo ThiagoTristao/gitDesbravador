@@ -12,7 +12,7 @@ const GitPage = (): JSX.Element => {
   return (
     <>
       <Head>
-        <title>GIT</title>
+        <title>GIT - Desbravador</title>
       </Head>
       <Box
         display={"flex"}
