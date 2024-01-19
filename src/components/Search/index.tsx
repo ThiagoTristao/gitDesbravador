@@ -15,7 +15,7 @@ import { getUserInfos, getUserRepos } from "@/services/api";
 import { Controller } from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function Search() {
+const Search = (): JSX.Element => {
   const { gitForm, loading, setLoading } = useContext(MyContext);
   const {
     handleSubmit,
@@ -25,8 +25,10 @@ export default function Search() {
     clearErrors,
     formState: { errors },
   } = gitForm;
-  const [showToast, setShowToast] = useState(false);
-  const [messageToast, setMessageToast] = useState('Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde.');
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [messageToast, setMessageToast] = useState<string>(
+    "Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde."
+  );
 
   const handleSetUser = async (event: any) => {
     const value = event.target.value;
@@ -36,46 +38,54 @@ export default function Search() {
 
   const fetchGetUserInfos = async () => {
     setLoading(true);
-    try {
-      const resp = await getUserInfos(getValues("user"));
-      setValue("userInfos", resp.data);
-    } catch (err:any){
-      if(err.response.status === 404){
-        setMessageToast("Usuário não encontrado.")
-      } else {
-        setMessageToast("Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde.")
-      } 
-      setShowToast(true);
-      setValue("userInfos", "");
-    } finally {
-      setLoading(false);
-    }
+
+    await getUserInfos(getValues("user"))
+      .then((resp) => {
+        setValue("userInfos", resp.data);
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setMessageToast("Usuário não encontrado.");
+        } else {
+          setMessageToast(
+            "Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde."
+          );
+        }
+        setShowToast(true);
+        setValue("userInfos", "");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const fetchGetUserRepos = async () => {
     setLoading(true);
-    try {
-      const resp = await getUserRepos(getValues("user"));
+    await getUserRepos(getValues("user")).then((resp) => {
       setValue("userRepos", resp.data);
-    } catch (err:any){
-      if(err.response.status === 404){
-        setMessageToast("Usuário não encontrado.")
+    })
+    .catch((err) => {
+      if (err.response.status === 404) {
+        setMessageToast("Usuário não encontrado.");
       } else {
-        setMessageToast("Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde.")
+        setMessageToast(
+          "Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde."
+        );
       }
       setShowToast(true);
       setValue("userRepos", "");
-    } finally {
+    })
+    .finally(() => {
       setLoading(false);
-    }
+    });
   };
 
   const onSubmit = async () => {
     await fetchGetUserInfos();
     await fetchGetUserRepos();
     setValue("user", "");
-  }
-  
+  };
+
   useEffect(() => {
     setValue("user", "");
   }, []);
@@ -120,9 +130,7 @@ export default function Search() {
                 rules={{ required: true }}
               />
               {errors.user && (
-                <FormHelperText>
-                  Informe o usuário!
-                </FormHelperText>
+                <FormHelperText>Informe o usuário!</FormHelperText>
               )}
             </FormControl>
             <CardActions>
@@ -141,4 +149,6 @@ export default function Search() {
       </>
     );
   }
-}
+};
+
+export default Search;

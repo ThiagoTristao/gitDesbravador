@@ -6,7 +6,7 @@ import { MyContext } from "@/context/context";
 import React, { useContext } from "react";
 import SearchResult from "@/components/SearchResult";
 
-export default function GitPage() {
+const GitPage = (): JSX.Element => {
   const { gitForm } = useContext(MyContext);
   const { getValues } = gitForm;
   return (
@@ -29,3 +29,5 @@ export default function GitPage() {
     </>
   );
 }
+
+export default GitPage

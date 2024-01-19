@@ -9,7 +9,7 @@ import {
 import { MyContext } from "@/context/context";
 import DataTable from "@/components/DataTable";
 
-export default function SearchResult() {
+const SearchResult = (): JSX.Element => {
   const { gitForm, loading } = useContext(MyContext);
 
   const { userInfos } = gitForm.getValues();
@@ -51,3 +51,5 @@ export default function SearchResult() {
     );
   }
 }
+
+export default SearchResult

@@ -1,14 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import apiURL from '@/constants/api';
+import { ReposInterface, UserInterface, UserReposInterface } from '@/interfaces';
 
-export async function getUserInfos(username: string) {
-    return await axios.get(`${apiURL}/users/${username}`)
-}
+export const getUserInfos = (username: string) : Promise<AxiosResponse<UserInterface>> => 
+     axios.get(`${apiURL}/users/${username}`);
 
-export async function getUserRepos(username: string) {
-    return await axios.get(`${apiURL}/users/${username}/repos`)
-}
+export const getUserRepos = (username: string) : Promise<AxiosResponse<UserReposInterface>> => 
+     axios.get(`${apiURL}/users/${username}/repos`);
 
-export async function getRepoInfos(username: string, repo: string) {
-    return await axios.get(`${apiURL}/repos/${username}/${repo}`)
-}
+export const getRepoInfos = (username: string, repo: string) : Promise<AxiosResponse<ReposInterface>> => 
+     axios.get(`${apiURL}/repos/${username}/${repo}`);

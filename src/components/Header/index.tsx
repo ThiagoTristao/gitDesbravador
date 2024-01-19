@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-export default function Header() {
+const Header = (): JSX.Element => {
   return (
     <>
       <Box
@@ -15,3 +15,5 @@ export default function Header() {
     </>
   );
 }
+
+export default Header
