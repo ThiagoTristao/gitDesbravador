@@ -95,13 +95,12 @@ const Search = (): JSX.Element => {
   } else {
     return (
       <>
-        {showToast && (
           <Snackbar
             open={showToast}
-            autoHideDuration={6000}
+            autoHideDuration={600}
             message={messageToast}
+            onClose={() => setShowToast(false)}
           />
-        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
             <FormControl

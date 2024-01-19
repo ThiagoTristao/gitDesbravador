@@ -47,13 +47,12 @@ const RepoDetails = (): JSX.Element => {
   } else {
     return (
       <>
-        {showToast && (
           <Snackbar
             open={showToast}
-            autoHideDuration={6000}
+            autoHideDuration={600}
             message="Ocorreu um erro ao consultar os dados, por favor, tente novamente mais tarde"
+            onClose={() => setShowToast(false)}
           />
-        )}
         {repoInfos && (
           <Card>
             <CardContent
