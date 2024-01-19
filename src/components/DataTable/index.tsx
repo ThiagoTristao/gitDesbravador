@@ -40,7 +40,6 @@ const DataTable = (): JSX.Element => {
           return (
             <Button variant="outlined" startIcon={<ArrowOutwardIcon />} 
               onClick={() => router.push(`/repoDetails?user=${userInfos.login}&repo=${dataIndex.rowData[0]}`)}>
-              {/* onClick={() => location.href=`/repoDetails?user=${userInfos.login}&repo=${dataIndex.rowData[0]}`}> */}
               Link
             </Button>
           );
