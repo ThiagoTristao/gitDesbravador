@@ -41,7 +41,7 @@ const SearchResult = (): JSX.Element => {
             </Typography>
             {userInfos.bio ? (
               <Typography variant="h6">Bio: {userInfos.bio}</Typography>
-            ): (
+            ) : (
               <Typography variant="h6">Sem bio 😭</Typography>
             )}
           </CardContent>
