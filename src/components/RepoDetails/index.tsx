@@ -16,8 +16,8 @@ import { ReposInterface } from "@/interfaces";
 
 const RepoDetails = (): JSX.Element => {
   const router = useRouter();
-  const user: string = router.query.user as string;
-  const repo: string = router.query.repo as string;
+  const user: string | string[] | undefined = router.query.user;
+  const repo: string | string[] | undefined = router.query.repo;
 
   const [repoInfos, setRepoInfos] = useState<ReposInterface>();
   const [showToast, setShowToast] = useState<boolean>(false);

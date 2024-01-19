@@ -8,5 +8,5 @@ export const getUserInfos = (username: string) : Promise<AxiosResponse<UserInter
 export const getUserRepos = (username: string) : Promise<AxiosResponse<UserReposInterface>> => 
      axios.get(`${apiURL}/users/${username}/repos`);
 
-export const getRepoInfos = (username: string, repo: string) : Promise<AxiosResponse<ReposInterface>> => 
+export const getRepoInfos = (username: string | string[] | undefined, repo: string | string[] | undefined) : Promise<AxiosResponse<ReposInterface>> => 
      axios.get(`${apiURL}/repos/${username}/${repo}`);
