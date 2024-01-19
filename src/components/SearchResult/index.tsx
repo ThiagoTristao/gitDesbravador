@@ -19,7 +19,7 @@ const SearchResult = (): JSX.Element => {
   } else {
     return (
       <>
-        <Card sx = {{marginTop:"1%", marginBottom:"1%"}}>
+        <Card sx={{margin:"1% 0%"}}>
           <CardContent
             sx={{
               display: "flex",
